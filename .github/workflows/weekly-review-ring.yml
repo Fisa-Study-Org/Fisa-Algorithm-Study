@@ -2,7 +2,7 @@ name: Weekly Review Ring
 
 on:
   schedule:
-    - cron: "0 0 * * 1" # 매주 월요일 09:00 KST
+    - cron: "0 0 * * 4" # 매주 월요일 09:00 KST
   workflow_dispatch: {}  # 수동 실행 가능
 
 jobs:
