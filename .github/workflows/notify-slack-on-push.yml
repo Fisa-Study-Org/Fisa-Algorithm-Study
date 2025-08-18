@@ -1,0 +1,46 @@
+name: Notify Slack on Push to main
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    env:
+      TZ: Asia/Seoul
+    steps:
+      - name: Get KST time
+        run: echo "KST_NOW=$(date '+%Y-%m-%d %H:%M KST')" >> $GITHUB_ENV
+
+      - name: Build message
+        id: msg
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const commits = context.payload.commits || [];
+            // 해시 빼고 메시지 + 작성자만 출력
+            const lines = commits
+              .slice(0, 10)
+              .map(c => `• ${c.message.split('\n')[0]} — ${c.author?.username || c.author?.name}`);
+            core.setOutput('summary', lines.join('\n') || '—');
+
+      - name: Post to Slack
+        uses: slackapi/slack-github-action@v1.27.0
+        with:
+          payload: |
+            {
+              "text": ":rocket: *main에 변경사항 푸시됨*",
+              "blocks": [
+                { "type": "header", "text": { "type": "plain_text", "text": "📌 main 브랜치 업데이트" } },
+                { "type": "section", "text": { "type": "mrkdwn", "text": "*리포지토리*: <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>\n*푸시한 유저*: ${{ github.actor }}\n*시간(KST)*: ${{ env.KST_NOW }}" } },
+                { "type": "section", "text": { "type": "mrkdwn", "text": "*커밋 요약*:\n${{ steps.msg.outputs.summary }}" } },
+                { "type": "divider" },
+                { "type": "section",
+                  "text": { "type": "mrkdwn", "text": ":bell: *로컬/포크 최신화*\n```bash\ngit checkout main\ngit pull --rebase origin main\n# (포크)\ngit fetch upstream\ngit rebase upstream/main\n```" }
+                }
+              ]
+            }
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_WEBHOOK_TYPE: INCOMING_WEBHOOK
