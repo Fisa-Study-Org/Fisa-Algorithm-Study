@@ -41,19 +41,14 @@ jobs:
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{
-                      toJSON(format("*리포지토리*: <{0}/{1}|{1}>\n*푸시한 유저*: {2}\n*시간(KST)*: {3}",
-                        github.server_url, github.repository, github.actor, env.KST_NOW))
-                    }}
+                    "text": ${{ toJSON(format('*리포지토리*: <{0}/{1}|{1}>\n*푸시한 유저*: {2}\n*시간(KST)*: {3}', github.server_url, github.repository, github.actor, env.KST_NOW)) }}
                   }
                 },
                 {
                   "type": "section",
                   "text": {
                     "type": "mrkdwn",
-                    "text": ${{
-                      toJSON(format("*커밋 요약*:\n{0}", steps.msg.outputs.summary))
-                    }}
+                    "text": ${{ toJSON(format('*커밋 요약*:\n{0}', steps.msg.outputs.summary)) }}
                   }
                 },
                 { "type": "divider" },
