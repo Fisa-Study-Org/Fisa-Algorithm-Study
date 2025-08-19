@@ -24,7 +24,7 @@ jobs:
             const commit = (context.payload.commits || [])[0];
             const msg = commit ? commit.message.split('\n')[0] : '— (no commit) —';
             const text =
-              `:압정: main 브랜치 업데이트\n` +
+              `main 브랜치 업데이트\n` +
               `푸시한 유저: ${context.actor}\n` +
               `시간(KST): ${process.env.KST_NOW}\n` +
               `커밋 요약:\n` +
