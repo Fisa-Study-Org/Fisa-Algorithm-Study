@@ -11,7 +11,7 @@ jobs:
       TZ: Asia/Seoul
     steps:
       - name: Get KST time
-        run: echo "KST_NOW=$(date '+%Y-%m-%d %H:%M KST')" >> $GITHUB_ENV
+        run: echo "KST_NOW=$(date '+%Y-%m-%d %H:%M KST')" >> "$GITHUB_ENV"
 
       - name: Build message
         id: msg
@@ -19,25 +19,50 @@ jobs:
         with:
           script: |
             const commits = context.payload.commits || [];
-            // 해시 빼고 메시지 + 작성자만 출력
-            const lines = commits
-              .slice(0, 10)
-              .map(c => `• ${c.message.split('\n')[0]} — ${c.author?.username || c.author?.name}`);
-            core.setOutput('summary', lines.join('\n') || '—');
+            const lines = commits.slice(0, 10).map(c => {
+              const author = c.author?.username || c.author?.name || 'unknown';
+              const title = (c.message || '').split('\n')[0];
+              return `• ${title} — ${author}`;
+            });
+            core.setOutput('summary', lines.join('\n') || '— (no commits captured) —');
 
       - name: Post to Slack
         uses: slackapi/slack-github-action@v1.27.0
         with:
           payload: |
             {
-              "text": ":rocket: *main에 변경사항 푸시됨*",
+              "text": ":rocket: main에 변경사항 푸시됨",
               "blocks": [
-                { "type": "header", "text": { "type": "plain_text", "text": "📌 main 브랜치 업데이트" } },
-                { "type": "section", "text": { "type": "mrkdwn", "text": "*리포지토리*: <${{ github.server_url }}/${{ github.repository }}|${{ github.repository }}>\n*푸시한 유저*: ${{ github.actor }}\n*시간(KST)*: ${{ env.KST_NOW }}" } },
-                { "type": "section", "text": { "type": "mrkdwn", "text": "*커밋 요약*:\n${{ steps.msg.outputs.summary }}" } },
+                {
+                  "type": "header",
+                  "text": { "type": "plain_text", "text": "📌 main 브랜치 업데이트" }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{
+                      toJSON(format("*리포지토리*: <{0}/{1}|{1}>\n*푸시한 유저*: {2}\n*시간(KST)*: {3}",
+                        github.server_url, github.repository, github.actor, env.KST_NOW))
+                    }}
+                  }
+                },
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": ${{
+                      toJSON(format("*커밋 요약*:\n{0}", steps.msg.outputs.summary))
+                    }}
+                  }
+                },
                 { "type": "divider" },
-                { "type": "section",
-                  "text": { "type": "mrkdwn", "text": ":bell: *로컬/포크 최신화*\n```bash\ngit checkout main\ngit pull --rebase origin main\n# (포크)\ngit fetch upstream\ngit rebase upstream/main\n```" }
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "🔔 *로컬/포크 최신화*\n```bash\ngit checkout main\ngit pull --rebase origin main\n# (포크)\ngit fetch upstream\ngit rebase upstream/main\n```"
+                  }
                 }
               ]
             }
