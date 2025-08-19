@@ -14,17 +14,21 @@ jobs:
       - name: Get KST time
         run: echo "KST_NOW=$(date '+%Y-%m-%d %H:%M KST')" >> "$GITHUB_ENV"
 
-      - name: Build simple text payload
+      - name: Build payload (single commit summary)
         id: payload
         uses: actions/github-script@v7
         env:
           KST_NOW: ${{ env.KST_NOW }}
         with:
           script: |
+            const commit = (context.payload.commits || [])[0];
+            const msg = commit ? commit.message.split('\n')[0] : '— (no commit) —';
             const text =
-              `📌 main 브랜치 업데이트\n` +
+              `:압정: main 브랜치 업데이트\n` +
               `푸시한 유저: ${context.actor}\n` +
-              `시간(KST): ${process.env.KST_NOW}`;
+              `시간(KST): ${process.env.KST_NOW}\n` +
+              `커밋 요약:\n` +
+              `• ${msg}`;
             core.setOutput('json', JSON.stringify({ text }));
 
       - name: Post to Slack
