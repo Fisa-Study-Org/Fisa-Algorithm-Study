@@ -34,9 +34,10 @@ feat(자기폴더이름): add /Baekjoon-문제번호.java
 
 | 주차  | 날짜       | 문제 1 | 문제 2 | 문제 3 |
 |-------|------------|--------|--------|--------|
-| 1주차 - 배열과 리스트 | 2025-08-21 | [11720 숫자의 합](https://www.acmicpc.net/problem/11720) (필수) | [1546 평균](https://www.acmicpc.net/problem/1546) (필수) | - |
-| 2주차 - 구간 합 | 2025-08-28 | [10986 나머지 합](https://www.acmicpc.net/problem/10986) (필수) | [11659 구간 합 구하기 4](https://www.acmicpc.net/problem/11659) (필수) | [11660 구간 합 구하기 5](https://www.acmicpc.net/problem/11660) (선택) |
-| 3주차 - 투 포인터 | 2025-08-28 | [1940 주몽](https://www.acmicpc.net/problem/1940) (필수) | [1253 좋다](https://www.acmicpc.net/problem/1253) (필수) | - |
+| 1주차 - 배열과 리스트 | 2025-08-06 | [11720 숫자의 합](https://www.acmicpc.net/problem/11720) (필수) | [1546 평균](https://www.acmicpc.net/problem/1546) (필수) | - |
+| 2주차 - 구간 합 | 2025-08-14 | [10986 나머지 합](https://www.acmicpc.net/problem/10986) (필수) | [11659 구간 합 구하기 4](https://www.acmicpc.net/problem/11659) (필수) | [11660 구간 합 구하기 5](https://www.acmicpc.net/problem/11660) (선택) |
+| 3주차 - 투 포인터 | 2025-08-21 | [1940 주몽](https://www.acmicpc.net/problem/1940) (필수) | [1253 좋다](https://www.acmicpc.net/problem/1253) (필수) | - |
+| 4주차 - 슬라이딩 윈도우 | 2025-08-28 | [12891 DNA 비밀번호](https://www.acmicpc.net/problem/12891) (필수) | [2531 회전초밥(실)](https://www.acmicpc.net/problem/2531) (필수) | [15961 회전초밥(골)](https://www.acmicpc.net/problem/15961) (필수) |
 
 
 
