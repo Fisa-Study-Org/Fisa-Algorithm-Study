@@ -1,0 +1,28 @@
+import java.util.Scanner;
+
+public class Main {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        //System.out.println("사이즈 입력: ");
+        int size = sc.nextInt(); //size 입력받기
+        sc.nextLine();
+
+        //int[] arr = new int[size]; //size 크기에 맞는 배열 생성
+        //System.out.println("숫자 공백없이 입력");
+        String num = sc.nextLine().trim(); //12345
+
+        int sum=0;
+        for(int i=0;i<size; i++){
+            char c = num.charAt(i);
+            //sum += c;
+            sum += Character.getNumericValue(c);
+        }
+
+        System.out.println(sum);
+        sc.close();
+
+    }
+}
