@@ -1,0 +1,45 @@
+package study;
+import java.io.*;
+
+public class BOJ_2023 {
+
+    static int N; // 자릿수
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        N = Integer.parseInt(br.readLine().trim());
+
+        // 1자리 소수에서 시작
+        int[] PrimeStarts = {2, 3, 5, 7};
+        for (int s : PrimeStarts) {
+            dfs(s, 1);
+        }
+    }
+
+    // DFS
+    static void dfs(int num, int depth) {
+        if (depth == N) {
+            System.out.println(num);
+            return;
+        }
+
+        // 뒷자리 후보 리스트
+        int[] PrimeEnds = {1, 3, 7, 9};
+        for (int d : PrimeEnds) {
+            int next = num * 10 + d;
+            if (isPrime(next)) {
+                dfs(next, depth + 1);
+            }
+        }
+    }
+
+    // 소수 판별
+    static boolean isPrime(int n) {
+        if (n < 2) return false;
+        //axb=c이면 루트cx루트c니까 a 혹은 b는 루트 c보다 하나는 무조건 작고 하나는 큼
+        for (int i = 2; i * i <= n; i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+}
