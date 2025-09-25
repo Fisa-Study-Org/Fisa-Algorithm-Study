@@ -1,0 +1,41 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+       // System.out.print("과목 수 입력: ");
+        int sub = sc.nextInt(); //시험 본 과목의 개수 N
+        int[] arr = new int[sub]; //시험 본 과목의 배열
+        double[] arr2 = new double[sub]; //조작된 시험 배열
+        int max = 0; //최고점
+
+        for(int i=0;i<sub;i++){
+            arr[i] = sc.nextInt();
+            //System.out.print("arr[] ");
+            //System.out.print(arr[i]+" ");
+        }
+
+        //max에 최대값 넣기
+        for(int i=0;i<sub;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
+        }
+
+        //System.out.println(max+" 이게 max입니다.");
+
+        for(int i=0;i<sub;i++){
+            arr2[i] = (arr[i]/(double)max) *100;
+            //System.out.print("arr2: "+arr2[i]+" ");
+        }
+
+        double sum = Arrays.stream(arr2).sum();
+
+        double new_avg = sum/sub;
+
+        System.out.println(new_avg);
+
+    }
+}
