@@ -41,7 +41,7 @@ feat(자기폴더이름): add /Baekjoon-문제번호.java
 | 5주차 - 스택과 큐 | 2025-09-04 | [1874 스택 수열](https://www.acmicpc.net/problem/1874) (필수) | [17298 오큰수](https://www.acmicpc.net/problem/17298) (필수) | [2164 카드2](https://www.acmicpc.net/problem/2164) (필수) | [11286 절댓값 힙](https://www.acmicpc.net/problem/11286) (선택) |
 | 6주차 - 정렬 | 2025-09-11 | [2751 수 정렬하기2](https://www.acmicpc.net/problem/2751) (필수) | [1517 버블소트](https://www.acmicpc.net/problem/1517) (필수) | - | | - |
 | 7주차 - 깊이우선탐색 | 2025-09-18 | [11724 연결요소의 개수](https://www.acmicpc.net/problem/11724) (필수) | [2023 신기한 소수](https://www.acmicpc.net/problem/2023) (필수) | [13023 ABCDE](https://www.acmicpc.net/problem/13023) (필수) | | - |
-| 7주차 - 너비우선탐색 | 2025-09-25 | [1260 DFS와 BFS](https://www.acmicpc.net/problem/1260) (필수) | [2178 미로탐색](https://www.acmicpc.net/problem/1260) (필수) | [1167 트리의 지름](https://www.acmicpc.net/problem/1167) (필수) | | - |
+| 8주차 - 너비우선탐색 | 2025-09-25 | [1260 DFS와 BFS](https://www.acmicpc.net/problem/1260) (필수) | [2178 미로탐색](https://www.acmicpc.net/problem/1260) (필수) | [1167 트리의 지름](https://www.acmicpc.net/problem/1167) (필수) | | - |
 
 
 
